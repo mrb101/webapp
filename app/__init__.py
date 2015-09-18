@@ -41,13 +41,13 @@ def create_app(config_name):
     example:
 
     from ._module import _module as _module_blueprint
-    app.register_blueprint(_module_blueprint)
+    app.register_blueprint(_module_blueprint, url_prefix='/_module')
     """
 
     from ._module import _module as _module_blueprint
-    app.register_blueprint(_module_blueprint)
+    app.register_blueprint(_module_blueprint, url_prefix='/_module')
 
     from .auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint)
+    app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
     return app
