@@ -1,8 +1,9 @@
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask.ext.login import UserMixin
 
 # import the db from main
-from app import db
+from app import db, login_manager
 
 
 # Models goes here....
@@ -12,7 +13,7 @@ class _module1(db.Model):
     created_at = db.Column(db.DateTime(), default=datetime.utcnow)
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
@@ -32,3 +33,7 @@ class User(db.Model):
 
     def verify_passowrd(self, password):
         return check_password_hash(self.password_hash, password)
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id)
