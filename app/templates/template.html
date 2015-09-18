@@ -76,6 +76,12 @@
     </nav>
 </div>
 {% endblock %}
+{% for message in get_flashed_messages() %}
+<div class="alert alert-warning">
+    <button type="button" class="close" data-dismiss="alert"></button>
+    {{ message }}
+</div>
+{% endfor %}
 
 <!-- the block where the content container for the body is set. its the main block each of the other templates inhertis from this !-->
 {% block content %}
