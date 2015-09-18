@@ -14,10 +14,13 @@ from config import config
 # Importing Extensions
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.login import LoginManager
 
 # Create the instance of the extension
 bootstrap = Bootstrap()
 db = SQLAlchemy()
+login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
 
 # models file is imported here. "Circuler dependences hell"
 from app import models
@@ -29,6 +32,7 @@ def create_app(config_name):
     # instantiate the extension
     bootstrap.init_app(app)
     db.init_app(app)
+    login_manager.init_app(app)
 
 
     """
