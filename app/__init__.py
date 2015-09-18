@@ -19,6 +19,9 @@ from flask.ext.sqlalchemy import SQLAlchemy
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 
+# models file is imported here. "Circuler dependences hell"
+from app import models
+
 def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
@@ -43,5 +46,8 @@ def create_app(config_name):
 
     from ._module import _module as _module_blueprint
     app.register_blueprint(_module_blueprint)
+
+    from .auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint)
 
     return app
