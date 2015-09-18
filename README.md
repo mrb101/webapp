@@ -23,7 +23,7 @@ pip install -r requirements.txt
 Structure
 ==============================
 
-### config.py
+### files
 
 **config.py** holds the configuration classes.
 
