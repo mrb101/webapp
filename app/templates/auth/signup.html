@@ -1,0 +1,35 @@
+<!-- Extends the template: templates/template.html !-->
+{% extends "template.html" %}
+
+<!-- The block which is defined in template: templates/template.html !-->
+{% block page_content %}
+<div class="container">
+<div class="row">
+  <div class="span4">
+    <legend><a href="#"><i class="glyphicon glyphicon-globe"></i></a> Sign up!</legend>
+      <form class="col-md-4 col-md-offset-4">
+        <div class="form-group">
+          <input type="text" class="form-control input-lg" placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control input-lg" placeholder="User Name">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control input-lg" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control input-lg" placeholder="Re-enter Email">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control input-lg" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control input-lg" placeholder="Re-enter Password">
+        </div>
+        <br />
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+      </form>
+    </div>
+</div>
+</div>
+{% endblock %}
