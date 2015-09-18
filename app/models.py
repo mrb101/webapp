@@ -19,6 +19,7 @@ class User(db.Model):
     user_name = db.Column(db.String(20), nullable= False, unique=True, index=True)
     email = db.Column(db.String(255), nullable=False, unique=True, index=True)
     password_hash = db.Column(db.String(255))
+    admin = db.Column(db.Boolean)
     created_at = db.Column(db.DateTime(), default=datetime.utcnow)
 
     @property
