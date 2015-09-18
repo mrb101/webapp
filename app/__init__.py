@@ -11,7 +11,7 @@ from config import config
     3- instantiate the extension
 """
 
-# Bootstrap
+# Importing Extensions
 from flask.ext.bootstrap import Bootstrap
 from flask.ext.sqlalchemy import SQLAlchemy
 
