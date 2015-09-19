@@ -20,8 +20,11 @@
             </button>
             <a class="navbar-brand" href="http://www.jquery2dotnet.com">Project Brazil</a>
         </div>
+
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <!-- Nav bar when user is logged in !-->
+            {% if current_user.is_authenticated %}
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ url_for('_module.index') }}"><span class="glyphicon glyphicon-home"></span>Dashboard</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-calendar"></span>Inventory</a></li>
@@ -37,9 +40,25 @@
                     </ul>
                 </li>
             </ul>
+            {% endif %}
+
+            <!-- Navbar if user is not logged in !-->
+            {% if not current_user.is_authenticated %}
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{{ url_for('_module.index') }}"><span class="glyphicon glyphicon-home"></span>About us</a></li>
+                <li><a href="{{ url_for('pages.pricing') }}"><span class="glyphicon glyphicon-calendar"></span>Pricing</a></li>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glcaretyphicon-list-alt"></span>Products<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ url_for('pages.webstore') }}">WebStore</a></li>
+                        <li><a href="{{ url_for('pages.marketplacesync') }}">MarketplacesSync</a></li>
+                    </ul>
+                </li>
+            </ul>
+            {% endif %}
+            <!-- Navbar Dropdown if user is logged in!-->
+            {% if current_user.is_authenticated %}
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                    class="glyphicon glyphicon-comment"></span>Messages <span class="label label-primary">42</span>
+                <li class="dropdown"><a href="{{ url_for('messages.inbox') }}" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-comment"></span>Messages <span class="label label-primary">42</span>
                 </a>
                     <ul class="dropdown-menu">
                         <li><a href="#"><span class="label label-warning">7:00 AM</span>Hi :)</a></li>
@@ -49,8 +68,7 @@
                         <li><a href="#" class="text-center">View All</a></li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                    class="glyphicon glyphicon-envelope"></span>Notifications <span class="label label-info">32</span>
+                <li class="dropdown"><a href="{{ url_for('notifications.index') }}" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-envelope"></span>Notifications <span class="label label-info">32</span>
                 </a>
                     <ul class="dropdown-menu">
                         <li><a href="#"><span class="label label-warning">4:00 AM</span>Favourites Snippet</a></li>
@@ -61,14 +79,21 @@
                         <li><a href="#" class="text-center">View All</a></li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
-                    class="glyphicon glyphicon-user"></span>Admin <b class="caret"></b></a>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>{{ current_user.name }}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-cog"></span>Settings</a></li>
+                        <li><a href="{{ url_for('auth.profile') }}"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+                        <li><a href="{{ url_for('auth.settings') }}"><span class="glyphicon glyphicon-cog"></span>Settings</a></li>
                         <li class="divider"></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-off"></span>Logout</a></li>
+                        <li class="active"><a href="{{ url_for('auth.logout') }}"><span class="glyphicon glyphicon-off"></span>Logout</a></li>
                     </ul>
+                </li>
+                {% else %}
+                <!-- Navbar Dropdown if user is not logged in !-->
+                <li>
+                     <ul class="nav navbar-right">
+                         <li><a href="{{ url_for('auth.login') }}"><span class="glyphicon glyphicon-off"></span>Login</a></li>
+                    </ul>
+                {% endif %}
                 </li>
             </ul>
         </div>
@@ -76,15 +101,17 @@
     </nav>
 </div>
 {% endblock %}
-{% for message in get_flashed_messages() %}
-<div class="alert alert-warning">
-    <button type="button" class="close" data-dismiss="alert"></button>
-    {{ message }}
-</div>
-{% endfor %}
 
 <!-- the block where the content container for the body is set. its the main block each of the other templates inhertis from this !-->
 {% block content %}
+  <div class="container">
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert"></button>
+            {{ message }}
+        </div>
+    {% endfor %}
+  </div>
   <div class="container">
     {% block page_content %} {% endblock%}
   </div>

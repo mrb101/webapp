@@ -54,4 +54,13 @@ def create_app(config_name):
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
+    from .pages import pages as pages_blueprint
+    app.register_blueprint(pages_blueprint, url_prefix='/services')
+
+    from .messages import messages as messages_blueprint
+    app.register_blueprint(messages_blueprint, url_prefix='/messages')
+
+    from .notifications import notifications as notifications_blueprint
+    app.register_blueprint(notifications_blueprint, url_prefix='/notifications')
+
     return app
