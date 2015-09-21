@@ -1,0 +1,51 @@
+{% extends "template.html" %}
+
+{% block page_content %}
+<div class="container">
+    <div class="span3 well">
+        <center>
+        <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" class="img-circle"></a>
+        <h3>{{ current_user.name }}</h3>
+        <h4>{{ current_user.user_name }}</h4>
+        <em>click my picture for details</em>
+		</center>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" datuser_namea-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title" id="myModalLabel">More About {{ current_user.name }}</h4>
+                    </div>
+                <div class="modal-body">
+                    <center>
+                    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" border="0" class="img-circle"></a><br />
+                    <br>
+                    <h3 class="media-heading">{{ current_user.name }} <small>Brazil</small></h3>
+                    <br>
+                    <span><strong>Position: </strong></span>
+                        <span class="label label-warning">{{ current_user.admin }}</span>
+                    </center>
+                    <center>
+                    <span><strong>Email: </strong></span>
+                        <span class="label label-warning">{{ current_user.email }}</span>
+                    </center>
+                    <br>
+                    <hr>
+                    <center>
+                    <p class="text-left"><strong>Bio: </strong><br>
+                        {{ current_user.bio }}</p>
+                    <br>
+                    </center>
+                </div>
+                <div class="modal-footer">
+                    <center>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
