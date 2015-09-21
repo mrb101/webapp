@@ -1,7 +1,7 @@
 Webapp
 ===========
 
-Webapp is a flask web application boilerplate
+Webapp is a flask web application skeleton
 
 
 Setup
